@@ -15,5 +15,6 @@ describe('visit bloom eats website', ()=>{
         pizzaFormCy.click()
 
         const pizzaHeader = cy.get('[data-test-id="pizza-form-header"]')
+        pizzaHeader.contains('YAS PIZZA!')
     })
 })

@@ -6,6 +6,7 @@ import PizzaForm from './components/pizza'
 const App = () => {
 
     const date = new Date()
+
     const [year] = useState(date.getFullYear())
 
 
@@ -22,6 +23,7 @@ const App = () => {
         </Route>
         <Route exact path='/pizza'>
           <Link id="home" class="link" to="/">Home</Link>
+      
           <PizzaForm />
         </Route>
       </Switch>
