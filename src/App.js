@@ -60,11 +60,11 @@ const App = () => {
       <h1>Bloom Eats</h1>
       <Switch>
         <Route exact path='/'>
-          <Link data-test-id="pizza-form" id="order-pizza" class="link" to="/pizza">Pizza?</Link>
+          <Link data-test-id="pizza-form" id="order-pizza" className="link" to="/pizza">Pizza?</Link>
         </Route>
         <Route exact path='/pizza'>
           <Link id="home" class="link" to="/">Home</Link>
-          <PizzaForm values={formValues} />
+          <PizzaForm values={formValues} submit={formSubmit}/>
         </Route>
       </Switch>
       
