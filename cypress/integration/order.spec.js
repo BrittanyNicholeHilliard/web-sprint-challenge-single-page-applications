@@ -10,6 +10,7 @@ describe('visit bloom eats website', ()=>{
         cy.contains('Bloom Eats')
     })
     it('can order a pizza', ()=> {
-        cy.get(`[pizza-test-id="root"]`)
+        const  pizzaFormCy = cy.get(`[data-test-id="animeGirl"]`)
+        expect(pizzaFormCy).to.exist
     })
 })

@@ -1,3 +1,7 @@
+body {
+  background-color: lightcoral;
+}
+
 .App {
   text-align: center;
 }
@@ -26,6 +30,15 @@
 
 .App-link {
   color: #61dafb;
+}
+
+[data-style="animeGirl"] {
+  width: 50%;
+}
+
+.link {
+  color: white;
+  
 }
 
 @keyframes App-logo-spin {

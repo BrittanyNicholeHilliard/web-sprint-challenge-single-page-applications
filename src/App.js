@@ -1,11 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
+import "./App.css"
+import {Link} from 'react-router-dom'
+
 
 const App = () => {
+
+    const date = new Date()
+    const [year] = useState(date.getFullYear())
+
+
+
+
+
   return (
-    <>
+    <div className="App">
+      <img data-test-id="animeGirl" data-style="animeGirl" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/fae12c72-d5df-41f7-abe8-686a467d2d9f/demzaf4-28db89aa-b5b8-4ba4-afcd-7f9acf9fe815.jpg/v1/fill/w_1280,h_1811,q_75,strp/pizza_girl___pepperonica_by_pigliicorn_demzaf4-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTgxMSIsInBhdGgiOiJcL2ZcL2ZhZTEyYzcyLWQ1ZGYtNDFmNy1hYmU4LTY4NmE0NjdkMmQ5ZlwvZGVtemFmNC0yOGRiODlhYS1iNWI4LTRiYTQtYWZjZC03ZjlhY2Y5ZmU4MTUuanBnIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.vNU5FP5SE9ABNGwSDw2zYu03-pQooaIW1vVlDcqhHc8" alt="Anime girl eating pizza" />
       <h1>Bloom Eats</h1>
-      <p>You can remove this code and create your own header</p>
-    </>
+      {/*<Link id="home" class="link" to="/">Home</Link>*/}
+      <Link id="order-pizza" class="link" to="/pizza/">Pizza?</Link> 
+      
+
+    </div>
   );
 };
 export default App;
