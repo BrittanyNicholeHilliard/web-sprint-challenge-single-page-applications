@@ -2,15 +2,46 @@ import React, {useEffect, useState} from "react";
 import "./App.css"
 import {Route, Link, Switch} from 'react-router-dom'
 import PizzaForm from './components/pizza'
+import axios from 'axios'
+import * as yup from 'yup'
+
+const initialFormValues = {
+  customername: '', 
+  pizzasize: '', 
+  pepperoni: false, 
+  ham: false, 
+  pineapple: false, 
+  mushrooms: false,
+  specialrequest: ''
+}
+
+const initialFormErrors ={
+  customername: '', 
+  pizzasize: '', 
+  specialrequest: ''
+}
+
+const initialOrders= []
 
 
 const App = () => {
 
-    const date = new Date()
-    
-    const [year] = useState(date.getFullYear())
+    const [formValues, setFormValues] = useState(initialFormValues)
+    const [formErrors, setFormErrors] = useState(initialFormErrors)
+    const [orders, setOrders] = useState(initialOrders)
 
+  const getOrders = () => {
+    axios.get(`https://reqres.in/api/orders`)
+    .then(res =>  setOrders(res.data))
+      .catch(err => console.error(err))
+    }
 
+    const postNewOrder = newOrder => {
+      axios.post(`https://reqres.in/api/orders`, newOrder)
+      .then(res => {
+        setOrders([res.data, ...orders]);
+      }).catch(err => console.error(err))
+       }
 
 
 
@@ -24,7 +55,7 @@ const App = () => {
         </Route>
         <Route exact path='/pizza'>
           <Link id="home" class="link" to="/">Home</Link>
-          <PizzaForm />
+          <PizzaForm values={formValues}/>
         </Route>
       </Switch>
       

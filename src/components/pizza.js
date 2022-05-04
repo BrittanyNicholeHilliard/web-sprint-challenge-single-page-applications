@@ -2,20 +2,9 @@ import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 
 
-    const initialFormValues = {
-        name: '', 
-        size: '', 
-        topping1: false, 
-        topping2: false, 
-        topping3: false, 
-        topping4: false,
-    }
-
-
 const PizzaForm = () => {
 
 
-    const [formValues, setFormValues] = useState(initialFormValues);
 
 
 
@@ -30,7 +19,7 @@ const PizzaForm = () => {
             </label>
             <label>
                 <h3>Pizza Size:</h3>
-                    <select name="pizza-size" id="size-dropdown"> 
+                    <select name="pizzasize" id="size-dropdown"> 
                         <option value=''>--How big do you want it?--</option>
                         <option value='small'>Small</option>
                         <option value='medium'>Medium</option>
