@@ -39,22 +39,27 @@ const PizzaForm = () => {
             </label>
             <label>
                 <h3>Toppings</h3>
-                <div className="toppingmenu">
+                    <div className="toppingmenu">
+                        <div>
                 <p>Pepperoni</p>
                     <input type="checkbox" name="pepperoni"/>                
                 <p>Ham</p>
                     <input type="checkbox" name="ham"/>
-                <p>Pineapple</p>
+                        </div>
+                        <div>
+                    <p>Pineapple</p>
                     <input type="checkbox" name="pineapple"/>
                 <p>Mushrooms</p>
-                    <input type="checkbox" name="mushrooms" />
-                </div>
-                    
-
-
+                   <input type="checkbox" name="mushrooms" />
+                        </div> 
+                    </div>
+            </label>
+            <label>
+                <h3>Have a special request?</h3>
+                <input type="text" name="specialrequest" id="special-text" />
             </label>
             
-
+  
         </form>
     </div>
 
