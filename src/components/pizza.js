@@ -2,10 +2,12 @@ import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 
 
-const PizzaForm = () => {
+const PizzaForm = (props) => {
 
 
-
+const onSubmit= evt => {
+    evt.preventDefault()
+}
 
 
     return(

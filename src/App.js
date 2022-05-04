@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import "./App.css"
 import {Route, Link, Switch} from 'react-router-dom'
 import PizzaForm from './components/pizza'
@@ -43,7 +43,16 @@ const App = () => {
       }).catch(err => console.error(err))
        }
 
+    
 
+    const formSubmit = () => {
+        const newOrder = {
+          customername: formValues.customername.trim(), 
+          pizzasize: formValues.pizzasize.trim(), 
+          toppings: ['pepperoni', 'ham', 'pineapple', 'mushrooms'].filter(top => !!formValues[top]),
+          specialrequest: formValues.specialrequest.trim()
+        }
+      }
 
   return (
     <div className="App">
@@ -55,7 +64,7 @@ const App = () => {
         </Route>
         <Route exact path='/pizza'>
           <Link id="home" class="link" to="/">Home</Link>
-          <PizzaForm values={formValues}/>
+          <PizzaForm values={formValues} />
         </Route>
       </Switch>
       
