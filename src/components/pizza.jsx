@@ -36,7 +36,7 @@ const initialFormValues = {
 
 const [form, setForm] = useState(initialFormValues)
 const [disabled, setDisabled] = useState(initialDisabled)
-const {values, checked, submit, change, orders, setOrders} = props
+const {values, change, orders, setOrders} = props
 
 const [errors, setErrors] = useState({
     customername: '', 
@@ -66,6 +66,7 @@ const validate = (customername, value) => {
       .then(() => setErrors({ ...errors, [customername]: ""}))
       .catch(err => setErrors({ ...errors, [customername]: err.errors[0]}))
   }
+  
 
 const onChange = (evt) => {
 const { name, value } = evt.target
