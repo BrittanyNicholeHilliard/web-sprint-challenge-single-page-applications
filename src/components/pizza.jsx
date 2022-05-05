@@ -1,10 +1,32 @@
 import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 
+const initialDisabled = true;
 
 const PizzaForm = (props) => {
 
+    const formSchema = yup.object({
+        customername: yup.string().required('Name is required').min(2, "name must be at least 2 characters"),
+        pizzasize: yup.string().required('please choose a pizza size'),
+        pepperoni: yup.boolean(),
+        ham: yup.boolean(), 
+        pineapple: yup.boolean(),
+        mushrooms: yup.boolean(), 
+        specialrequest: yup.string()
+
+    })
+
+
     const {values, checked, submit, change, orders, setOrders} = props
+    const [error, setErrors] = useState({
+        customername: '', 
+        pizzasize: '', 
+        pepperoni: '', 
+        ham: '', 
+        pineapple: '',
+        mushrooms: '',
+        specialrequest: ''
+    })
 
 
 const initialFormValues = {
@@ -19,12 +41,19 @@ const initialFormValues = {
 
 
 const [form, setForm] = useState(initialFormValues)
+const [disabled, setDisabled] = useState(initialDisabled)
+
 
 const onSubmit= evt => {
     evt.preventDefault()
     setOrders([form, ...orders])
-
 }
+
+
+
+  useEffect(() => {
+    formSchema.isValid(values).then(valid => setDisabled(!valid))
+  }, [values])
 
 const onChange = (evt) => {
 const { name, value } = evt.target
@@ -33,6 +62,7 @@ change(name, valueToUse)
 setForm({...form, [name]: valueToUse})
 console.log(form);
 }
+
 
 
     return(
@@ -75,7 +105,7 @@ console.log(form);
                 <h3>Have a special request?</h3>
                 <input type="text" name="specialrequest" id="special-text" onChange={onChange}/>
             </label>
-            <button name= "submitBtn" type="submit" id="order-button">Submit Order</button>
+            <button name= "submitBtn" type="submit" id="order-button" data-test-id="submitBtn" disabled={disabled}>Submit Order</button>
         </form>
     </div>
 

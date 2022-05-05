@@ -4,7 +4,7 @@ import {Route, Link, Switch} from 'react-router-dom'
 import PizzaForm from './components/pizza'
 import axios from 'axios'
 import * as yup from 'yup'
-import FormSchema from './validation/formSchema.js'
+
 
 const initialFormValues = {
   customername: '', 
@@ -24,16 +24,16 @@ const initialFormErrors ={
 
 
 
-
 const App = () => {
 
     const [formValues, setFormValues] = useState(initialFormValues)
-    const [formErrors, setFormErrors] = useState(initialFormErrors)
     const [orders, setOrders] = useState([])
+
 
     useEffect(()=>{
       console.log(orders)
     }, [orders])
+
 
   const getOrders = () => {
     axios.get(`https://reqres.in/api/orders`)
@@ -57,6 +57,8 @@ const App = () => {
           .then(() => setFormErrors({ ...formErrors, [name]: ""}))
           .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]}))
       } */
+
+
 
    const inputChange = (customername, value) => {
         setFormValues({...formValues, [customername]: value})
