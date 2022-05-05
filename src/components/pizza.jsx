@@ -28,7 +28,7 @@ const initialFormValues = {
   }
 
   const formErrors = {
-    customername: 'name must be at least 2 characters', 
+    customername: '', 
     pizzasize: '', 
     specialrequest: '',
   }
@@ -39,7 +39,7 @@ const [disabled, setDisabled] = useState(initialDisabled)
 const {values, change, orders, setOrders} = props
 
 const [errors, setErrors] = useState({
-    customername: '', 
+    customername: 'name must be at least 2 characters', 
     pizzasize: '', 
     pepperoni: '', 
     ham: '', 
@@ -60,11 +60,11 @@ const [errors, setErrors] = useState({
 //       })
 // }
 
-const validate = (customername, value) => {
-    yup.reach(formSchema, customername)
+const validate = (name, value) => {
+    yup.reach(formSchema, name)
       .validate(value)
-      .then(() => setErrors({ ...errors, [customername]: ""}))
-      .catch(err => setErrors({ ...errors, [customername]: err.errors[0]}))
+      .then(() => setErrors({ ...errors, [name]: ""}))
+      .catch(err => setErrors({ ...errors, [name]: err.errors[0]}))
   }
   
 
@@ -104,7 +104,7 @@ const onSubmit= evt => {
             
         <form id="pizza-form" data-test-id="pizza-form" onSubmit={onSubmit}>
             <label>
-                <h3>Name:</h3><p>{formErrors.customername}</p> 
+                <h3>Name:</h3><p>{errors.customername}</p> 
                     < input type="text" id="name-input" data-test-id="nameField" name="customername" onChange={onChange} value={values.customername}/>
             </label>
             <label>
