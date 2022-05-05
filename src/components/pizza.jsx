@@ -28,7 +28,7 @@ const initialFormValues = {
   }
 
   const formErrors = {
-    customername: '', 
+    customername: 'name must be at least 2 characters', 
     pizzasize: '', 
     specialrequest: '',
   }
@@ -60,13 +60,19 @@ const [errors, setErrors] = useState({
 //       })
 // }
 
+
+
 const validate = (name, value) => {
     yup.reach(formSchema, name)
       .validate(value)
-      .then(() => setErrors({ ...errors, [name]: ""}))
+      .then(() => setErrors({ ...errors, [name]: ''}))
       .catch(err => setErrors({ ...errors, [name]: err.errors[0]}))
   }
   
+
+  useEffect(() =>{
+      validate();
+  }, [form])
 
 const onChange = (evt) => {
 const { name, value } = evt.target
