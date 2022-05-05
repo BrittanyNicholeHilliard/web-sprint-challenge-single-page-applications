@@ -26,10 +26,11 @@ const onSubmit= evt => {
 }
 
 const onChange = (evt) => {
-const { name, value, checked, type } = evt.target
-const valueToUse = type === "checkbox" ? checked: value
+const { name, value } = evt.target
+const valueToUse = evt.target.type === "checkbox" ? evt.target.checked : evt.target.value
 change(name, valueToUse)
-setForm({...form, [name]: value})
+setForm({...form, [name]: valueToUse})
+console.log(form);
 }
 
 
@@ -72,7 +73,7 @@ setForm({...form, [name]: value})
                 <h3>Have a special request?</h3>
                 <input type="text" name="specialrequest" id="special-text" onChange={onChange}/>
             </label>
-            
+            <button name= "submitBtn" />
   
         </form>
     </div>

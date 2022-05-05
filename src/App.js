@@ -55,8 +55,7 @@ const App = () => {
       } */
 
    const inputChange = (customername, value) => {
-        setFormValues({...formValues, [customername]: value 
-        })
+        setFormValues({...formValues, [customername]: value})
       }
     
 
@@ -67,6 +66,8 @@ const App = () => {
           toppings: ['pepperoni', 'ham', 'pineapple', 'mushrooms'].filter(top => !!formValues[top]),
           specialrequest: formValues.specialrequest.trim()
         }
+
+        postNewOrder(newOrder);
       }
 
   return (
