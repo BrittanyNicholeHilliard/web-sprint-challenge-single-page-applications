@@ -4,6 +4,7 @@ import {Route, Link, Switch} from 'react-router-dom'
 import PizzaForm from './components/pizza'
 import axios from 'axios'
 import * as yup from 'yup'
+import FormSchema from './validation/formSchema.js'
 
 const initialFormValues = {
   customername: '', 
@@ -32,17 +33,31 @@ const App = () => {
 
   const getOrders = () => {
     axios.get(`https://reqres.in/api/orders`)
-    .then(res =>  setOrders(res.data))
-      .catch(err => console.error(err))
+    .then(res => {
+      console.log(res.data)
+    setOrders(res.data)
+    })      .catch(err => console.error(err))
     }
 
     const postNewOrder = newOrder => {
       axios.post(`https://reqres.in/api/orders`, newOrder)
       .then(res => {
-        setOrders([res.data, ...orders]);
+        setOrders([res.data, ...orders])
+        console.log([res.data, ...orders])
       }).catch(err => console.error(err))
        }
 
+ /* const validate = (name, value) => {
+        yup.reach(FormSchema, name)
+          .validate(value)
+          .then(() => setFormErrors({ ...formErrors, [name]: ""}))
+          .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]}))
+      } */
+
+   const inputChange = (customername, value) => {
+        setFormValues({...formValues, [customername]: value 
+        })
+      }
     
 
     const formSubmit = () => {
@@ -63,8 +78,8 @@ const App = () => {
           <Link data-test-id="pizza-form" id="order-pizza" className="link" to="/pizza">Pizza?</Link>
         </Route>
         <Route exact path='/pizza'>
-          <Link id="home" class="link" to="/">Home</Link>
-          <PizzaForm values={formValues} submit={formSubmit}/>
+          <Link id="home" className="link" to="/">Home</Link>
+          <PizzaForm values={formValues} submit={formSubmit} initialFormValues={initialFormValues} change={inputChange}/>
         </Route>
       </Switch>
       

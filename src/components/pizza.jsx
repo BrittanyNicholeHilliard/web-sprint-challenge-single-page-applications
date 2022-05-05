@@ -1,6 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 
+
+const PizzaForm = (props) => {
+
+    const {values, checked, submit, change} = props
+
+
 const initialFormValues = {
     customername: '', 
     pizzasize: '', 
@@ -12,11 +18,6 @@ const initialFormValues = {
   }
 
 
-const PizzaForm = (props) => {
-
-    const {values, checked, submit} = props
-
-
 const [form, setForm] = useState(initialFormValues)
 
 const onSubmit= evt => {
@@ -24,8 +25,11 @@ const onSubmit= evt => {
     submit()
 }
 
-const formChange = (evt) => {
-    console.log(evt)
+const onChange = (evt) => {
+const { name, value, checked, type } = evt.target
+const valueToUse = type === "checkbox" ? checked: value
+change(name, valueToUse)
+setForm({...form, [name]: value})
 }
 
 
@@ -36,11 +40,11 @@ const formChange = (evt) => {
         <form id="pizza-form" data-test-id="pizza-form">
             <label>
                 <h3>Name:</h3> 
-                    < input type="text" id="name-input" name="customername" onChange={formChange} value={values.customername}/>
+                    < input type="text" id="name-input" name="customername" onChange={onChange} value={values.customername}/>
             </label>
             <label>
                 <h3>Pizza Size:</h3>
-                    <select name="pizzasize" id="size-dropdown" onChange={formChange}> 
+                    <select name="pizzasize" id="size-dropdown" onChange={onChange}> 
                         <option value=''>--How big do you want it?--</option>
                         <option value='small'>Small</option>
                         <option value='medium'>Medium</option>
@@ -52,21 +56,21 @@ const formChange = (evt) => {
                     <div className="toppingmenu">
                         <div>
                 <p>Pepperoni</p>
-                    <input type="checkbox" name="pepperoni" checked={values.pepperoni} onChange={formChange}/>                
+                    <input type="checkbox" name="pepperoni" checked={values.pepperoni} onChange={onChange} />                
                 <p>Ham</p>
-                    <input type="checkbox" name="ham" checked={values.ham} onChange={formChange}/>
+                    <input type="checkbox" name="ham" checked={values.ham} onChange={onChange}/>
                         </div>
                         <div>
                     <p>Pineapple</p>
-                    <input type="checkbox" name="pineapple" checked={values.pineapple} onChange={formChange}/>
+                    <input type="checkbox" name="pineapple" checked={values.pineapple} onChange={onChange}/>
                 <p>Mushrooms</p>
-                   <input type="checkbox" name="mushrooms" checked={values.mushrooms} onChange={formChange}/>
+                   <input type="checkbox" name="mushrooms" checked={values.mushrooms} onChange={onChange}/>
                         </div> 
                     </div>
             </label>
             <label>
                 <h3>Have a special request?</h3>
-                <input type="text" name="specialrequest" id="special-text" onChange={formChange}/>
+                <input type="text" name="specialrequest" id="special-text" onChange={onChange}/>
             </label>
             
   
