@@ -49,18 +49,6 @@ const [errors, setErrors] = useState({
 })
 
 
-// const validate = (name, value) => {
-//     yup.reach(formSchema, name)
-//       .validate(value)
-//       .then(()=>{
-//           setErrors({...errors, [name]: ""})
-//       })
-//       .catch((err) => {
-//           setErrors({...errors, [name]: err.errors[0] })
-//       })
-// }
-
-
 
 const validate = (name, value) => {
     yup.reach(formSchema, name)
@@ -87,14 +75,14 @@ const onSubmit= evt => {
     evt.preventDefault()
     setOrders([form, ...orders])
     setForm(initialFormValues)
-    validate();
+
 
 }
 
 
   useEffect(() => {
     formSchema.isValid(values).then(valid => setDisabled(!valid))
-    validate();
+
   }, [values])
 
 
