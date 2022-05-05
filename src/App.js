@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./App.css"
 import {Route, Link, Switch} from 'react-router-dom'
 import PizzaForm from './components/pizza'
@@ -22,14 +22,18 @@ const initialFormErrors ={
   specialrequest: ''
 }
 
-const initialOrders= []
+
 
 
 const App = () => {
 
     const [formValues, setFormValues] = useState(initialFormValues)
     const [formErrors, setFormErrors] = useState(initialFormErrors)
-    const [orders, setOrders] = useState(initialOrders)
+    const [orders, setOrders] = useState([])
+
+    useEffect(()=>{
+      console.log(orders)
+    }, [orders])
 
   const getOrders = () => {
     axios.get(`https://reqres.in/api/orders`)
@@ -76,11 +80,12 @@ const App = () => {
       <h1>Bloom Eats</h1>
       <Switch>
         <Route exact path='/'>
+        <p>You've ordered {orders.length} pizzas.</p>
           <Link data-test-id="pizza-form" id="order-pizza" className="link" to="/pizza">Pizza?</Link>
         </Route>
         <Route exact path='/pizza'>
           <Link id="home" className="link" to="/">Home</Link>
-          <PizzaForm values={formValues} submit={formSubmit} initialFormValues={initialFormValues} change={inputChange}/>
+          <PizzaForm values={formValues} submit={formSubmit} initialFormValues={initialFormValues} change={inputChange} orders={orders} setOrders={setOrders}/>
         </Route>
       </Switch>
       

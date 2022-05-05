@@ -4,7 +4,7 @@ import * as yup from 'yup'
 
 const PizzaForm = (props) => {
 
-    const {values, checked, submit, change} = props
+    const {values, checked, submit, change, orders, setOrders} = props
 
 
 const initialFormValues = {
@@ -22,7 +22,8 @@ const [form, setForm] = useState(initialFormValues)
 
 const onSubmit= evt => {
     evt.preventDefault()
-    submit()
+    setOrders([form, ...orders])
+
 }
 
 const onChange = (evt) => {
@@ -38,7 +39,8 @@ console.log(form);
     
     <div> 
         <h2 data-test-id="pizza-form-header">YAS PIZZA!</h2>
-        <form id="pizza-form" data-test-id="pizza-form">
+            
+        <form id="pizza-form" data-test-id="pizza-form" onSubmit={onSubmit}>
             <label>
                 <h3>Name:</h3> 
                     < input type="text" id="name-input" name="customername" onChange={onChange} value={values.customername}/>
@@ -73,8 +75,7 @@ console.log(form);
                 <h3>Have a special request?</h3>
                 <input type="text" name="specialrequest" id="special-text" onChange={onChange}/>
             </label>
-            <button name= "submitBtn" />
-  
+            <button name= "submitBtn" type="submit" id="order-button">Submit Order</button>
         </form>
     </div>
 
