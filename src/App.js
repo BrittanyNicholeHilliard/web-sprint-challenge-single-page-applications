@@ -3,8 +3,6 @@ import "./App.css"
 import {Route, Link, Switch} from 'react-router-dom'
 import PizzaForm from './components/pizza'
 import axios from 'axios'
-import * as yup from 'yup'
-
 
 const initialFormValues = {
   customername: '', 
@@ -16,11 +14,6 @@ const initialFormValues = {
   specialrequest: ''
 }
 
-const initialFormErrors ={
-  customername: '', 
-  pizzasize: '', 
-  specialrequest: ''
-}
 
 
 
@@ -51,12 +44,6 @@ const App = () => {
       }).catch(err => console.error(err))
        }
 
- /* const validate = (name, value) => {
-        yup.reach(FormSchema, name)
-          .validate(value)
-          .then(() => setFormErrors({ ...formErrors, [name]: ""}))
-          .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0]}))
-      } */
 
 
 

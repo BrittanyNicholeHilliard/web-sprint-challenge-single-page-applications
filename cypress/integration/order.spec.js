@@ -17,8 +17,28 @@ describe('visit bloom eats website', ()=>{
         const pizzaHeader = cy.get('[data-test-id="pizza-form-header"]')
         pizzaHeader.contains('YAS PIZZA!')
 
-        const nameField = cy.get(`[data-test-id=submitBtn]`)
+        const submitBtn = () => cy.get(`[data-test-id="submitBtn"]`)
+        submitBtn().should('be.disabled')
+
+
+        const nameField = cy.get(`[data-test-id="nameField"]`)
+        nameField.click()
+        nameField.type(`Saiki Kusuo`)
+
+        const pizzaSize = cy.get(`[id="size-dropdown"]`)
+        pizzaSize.select('small')
+
+       it('can check multiple boxes', () => {
+        cy.get('input[type="checkbox"]')
+        .as('checkboxes')
+        .check()
+       })
+
+        const special = cy.get(`[data-test-id='specialrequest']`)
+       special.click()
+       special.type('No thank you')
+
+       submitBtn().click()
+    
     })
-
-
 })

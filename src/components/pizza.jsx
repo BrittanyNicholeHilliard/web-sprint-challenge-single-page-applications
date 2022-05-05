@@ -3,7 +3,7 @@ import * as yup from 'yup'
 
 const initialDisabled = true;
 
-const PizzaForm = (props) => {
+export default function PizzaForm (props) {
 
     const formSchema = yup.object({
         customername: yup.string().required('Name is required').min(2, "name must be at least 2 characters"),
@@ -17,18 +17,6 @@ const PizzaForm = (props) => {
     })
 
 
-    const {values, checked, submit, change, orders, setOrders} = props
-    const [error, setErrors] = useState({
-        customername: '', 
-        pizzasize: '', 
-        pepperoni: '', 
-        ham: '', 
-        pineapple: '',
-        mushrooms: '',
-        specialrequest: ''
-    })
-
-
 const initialFormValues = {
     customername: '', 
     pizzasize: '', 
@@ -39,29 +27,72 @@ const initialFormValues = {
     specialrequest: ''
   }
 
+  const formErrors = {
+    customername: 'name must be at least 2 characters', 
+    pizzasize: '', 
+    specialrequest: '',
+  }
+
 
 const [form, setForm] = useState(initialFormValues)
 const [disabled, setDisabled] = useState(initialDisabled)
+const {values, checked, submit, change, orders, setOrders} = props
+
+const [errors, setErrors] = useState({
+    customername: '', 
+    pizzasize: '', 
+    pepperoni: '', 
+    ham: '', 
+    pineapple: '',
+    mushrooms: '',
+    specialrequest: ''
+})
 
 
-const onSubmit= evt => {
-    evt.preventDefault()
-    setOrders([form, ...orders])
-}
+// const validate = (name, value) => {
+//     yup.reach(formSchema, name)
+//       .validate(value)
+//       .then(()=>{
+//           setErrors({...errors, [name]: ""})
+//       })
+//       .catch((err) => {
+//           setErrors({...errors, [name]: err.errors[0] })
+//       })
+// }
 
-
-
-  useEffect(() => {
-    formSchema.isValid(values).then(valid => setDisabled(!valid))
-  }, [values])
+const validate = (customername, value) => {
+    yup.reach(formSchema, customername)
+      .validate(value)
+      .then(() => setErrors({ ...errors, [customername]: ""}))
+      .catch(err => setErrors({ ...errors, [customername]: err.errors[0]}))
+  }
 
 const onChange = (evt) => {
 const { name, value } = evt.target
 const valueToUse = evt.target.type === "checkbox" ? evt.target.checked : evt.target.value
 change(name, valueToUse)
 setForm({...form, [name]: valueToUse})
-console.log(form);
+validate();
 }
+
+
+const onSubmit= evt => {
+    evt.preventDefault()
+    setOrders([form, ...orders])
+    setForm(initialFormValues)
+    validate();
+
+}
+
+
+  useEffect(() => {
+    formSchema.isValid(values).then(valid => setDisabled(!valid))
+  }, [values])
+
+
+
+
+
 
 
 
@@ -72,8 +103,8 @@ console.log(form);
             
         <form id="pizza-form" data-test-id="pizza-form" onSubmit={onSubmit}>
             <label>
-                <h3>Name:</h3> 
-                    < input type="text" id="name-input" name="customername" onChange={onChange} value={values.customername}/>
+                <h3>Name:</h3><p>{formErrors.customername}</p> 
+                    < input type="text" id="name-input" data-test-id="nameField" name="customername" onChange={onChange} value={values.customername}/>
             </label>
             <label>
                 <h3>Pizza Size:</h3>
@@ -103,15 +134,15 @@ console.log(form);
             </label>
             <label>
                 <h3>Have a special request?</h3>
-                <input type="text" name="specialrequest" id="special-text" onChange={onChange}/>
+                <input type="text" name="specialrequest" id="special-text" data-test-id='specialrequest' onChange={onChange}/>
             </label>
+            <div className='errors'>
+                <div><p></p>
+                <p></p></div>
+            </div>
             <button name= "submitBtn" type="submit" id="order-button" data-test-id="submitBtn" disabled={disabled}>Submit Order</button>
         </form>
     </div>
-
-
     )
 
 }
-
-export default PizzaForm
