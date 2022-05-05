@@ -79,7 +79,7 @@ const { name, value } = evt.target
 const valueToUse = evt.target.type === "checkbox" ? evt.target.checked : evt.target.value
 change(name, valueToUse)
 setForm({...form, [name]: valueToUse})
-validate();
+
 }
 
 
@@ -94,6 +94,7 @@ const onSubmit= evt => {
 
   useEffect(() => {
     formSchema.isValid(values).then(valid => setDisabled(!valid))
+    validate();
   }, [values])
 
 
